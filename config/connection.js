@@ -1,12 +1,14 @@
 require('dotenv').config();
 
 // create connection to our db
-const sequelize = process.env.JAWSDB_URL
-  ? new Sequelize(process.env.JAWSDB_URL)
-  : new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-      host: 'localhost',
-      dialect: 'mysql',
-      port: 3306
-    });
+const { Sequelize } = require('sequelize');
 
-module.exports = sequelize;
+const client = new Sequelize({
+    dialect: 'postgres',
+    host: 'localhost',
+    username: process.env.LOCAL_DB_USERNAME,
+    password: process.env.LOCAL_DB_PASSWORD,
+    database: process.env.LOCAL_DB_NAME
+});
+
+module.exports = client;
