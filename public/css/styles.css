@@ -1,56 +1,74 @@
 /* RESETS */
 * {
-    /* margin: 0;
-    padding: 0; */
     box-sizing: border-box;
     font-family: sans-serif;
-  }
-  
-  a {
+}
+
+a {
     color: #333;
-  }
-  
-  form {
+}
+
+form {
     width: 400px;
     margin: 0 auto;
-  }
-  
-  form > * {
+}
+
+form>* {
     padding: 6px 10px;
     margin-bottom: 6px;
-  }
-  
-  /* GLOBAL CLASSES */
-  .row, .column {
+}
+
+/* GLOBAL CLASSES */
+.row,
+.column {
     display: flex;
-  }
-  
-  .column {
+}
+
+.column {
     flex-direction: column;
-  }
-  
-  .justify-between {
+}
+
+.justify-between {
     justify-content: space-between;
-  }
-  
-  .align-center {
+}
+
+.align-center {
     align-items: center;
-  }
-  
-  .text-center {
+}
+
+.text-center {
     text-align: center;
-  }
-  
-  .mr-2 {
+}
+
+.mr-2 {
     margin-right: 15px;
-  }
-  
-  /* CUSTOM STYLES */
-  
-  nav a {
+}
+
+/* CUSTOM STYLES */
+
+nav a {
     text-decoration: none;
-  }
-  
-  nav a.active, nav a:hover {
+}
+
+nav a.active, nav a:hover {
     text-decoration: underline;
-  }
+}
+
+/*Media*/
+
+@media(max-width: 600px) {
+    header.is-flex-direction-row {
+        display: flex;
+        flex-direction: column !important;
+    }
+
+    header h1.title {
+        font-size: 1.5rem !important;
+        text-align: center;
+    }
+
+    header nav a,
+    header p {
+        font-size: .85rem;
+    }
+}
