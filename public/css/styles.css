@@ -19,8 +19,7 @@ form>* {
 }
 
 /* GLOBAL CLASSES */
-.row,
-.column {
+.row, .column {
     display: flex;
 }
 
@@ -67,8 +66,7 @@ nav a.active, nav a:hover {
         text-align: center;
     }
 
-    header nav a,
-    header p {
+    header nav a, header p {
         font-size: .85rem;
     }
 }
