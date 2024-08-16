@@ -24,19 +24,16 @@ module.exports = {
       }
     });
 
-    
     if (!user) {
       return res.redirect('/register');
     }
 
-    
     const valid_pass = await user.validatePassword(formData.password);
 
     if (!valid_pass) {
       return res.redirect('/login');
     }
-
-    
+   
     req.session.user_id = user.id;
 
     res.redirect('/dashboard');

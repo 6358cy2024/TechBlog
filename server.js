@@ -5,7 +5,7 @@ const { engine } = require('express-handlebars');
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 const client = require('./config/connection');
-const view_routes = require('./routes/view_routes');
+const view_routes = require('./routes/view_routes.js');
 const user_routes = require('./routes/user_routes');
 
 const app = express();
