@@ -1,110 +1,94 @@
+const { User, Post, Comment } = require('../models');
+const { format } = require('date-fns');
+
 module.exports = {
-  async showHomepage(req, res) {
-      const user = await User.findByPk(req.session.user_id, {
-          parts: ['username']
-      });
+    showHomePage(req, res) {
+        res.render('homepage', {
+            title: 'Blog - Homepage'
+        });
+    },
 
-      const posts = await BlogPost.findAll({
+    showRegisterPage(req, res) {
+        res.render('register', {
+            title: 'Blog - Register',
+            register: true
+        });
+    },
 
-          parts: ['id', 'title', 'content', 'date'],
-          include: [
-              {
-                  model: User,
-                  parts: ['username']
-              },
-              {
-                  model: Comment,
-                  parts: ['content', 'date'],
-                  include: {
-                      model: User,
-                      parts: ['username']
-                  }
-              }
-          ]
-      });
+    showLoginPage(req, res) {
+        res.render('login', {
+            title: 'Blog - Log In',
+            login: true
+        });
+    },
+
+    async showDashboardPage(req, res) {
+        try {
+            const user = await User.findByPk(req.session.user_id, {
+                include: [{
+                    model:Post,
+                    include:[Comment, User]
+                }] // Eager load posts
+            });
+ 
+            // Format the createdAt date for each post
+            const posts = user.posts.map(post => {
+                return {
+                    ...post.get({ plain: true }),
+                    formattedDate: format(new Date(post.createdAt), 'dd/MM/yyyy')
+                };
+            });
+            console.log(posts)
+            res.render('dashboard', {
+                title: 'Blog - Dashboard',
+                user: user.get({ plain: true }),
+                posts, // Pass the formatted posts
+                user_page: true,
+                dashboard: true
+            });
+        } catch (error) {
+            console.error('Error fetching user and posts:', error);
+            res.status(500).send('Internal Server Error');
+        }
+    },
 
 
-      //flatten the data structure
-      const flattenedPosts = posts.map(post => post.get({ plain: true }));
 
-      res.render('homepage', {
-          title: 'TechBlog Homepage',
-          posts: flattenedPosts,
-          user: user ? user.get({ plain: true }) : false
-      });
-  },
+    async showAddPage(req, res) {
+        try {
+            const user = await User.findByPk(req.session.user_id, {
+                attributes: ['username']
+            });
 
-  showRegisterPage(req, res) {
-      res.render('register', {
-          title: 'TechBlog Register',
-          register: true
-      })
-  },
+            res.render('add', {
+                user: user.get({ plain: true }),
+                title: 'Blog - Add Post',
+                user_page: true,
+                add: true
+            });
+        } catch (error) {
+            console.log('Error rendering Add Page:', error);
+            res.status(500).send('Internal Server Error');
+        }
+    }, async showEditPage(req, res) {
+        try {
+            const user = await User.findByPk(req.session.user_id, {
+                attributes: ['username']
+            });
+            const post = await Post.findByPk(req.params.post_id);
+            console.log(post)
 
-  showLoginPage(req, res) {
-      res.render('login', {
-          title: 'TechBlog Login',
-          login: true
-      })
-  },
+            res.render('edit', {
+                user: user.get({ plain: true }),
+                title: 'Blog - Edit Post',
+                post: post.get({ plain: true }),
+                user_page: true,
+                search: true
+            });
+        } catch (error) {
+            console.log('Error rendering Add Page:', error);
+            res.status(500).send('Internal Server Error');
+        }
+    }
 
-  async showAdd(req, res) {
-      const user = await User.findByPk(req.session.user_id, {
-          parts: ['email', 'username']
-      })
-
-      res.render('add', {
-          title: 'TB Add',
-          user: user.get({ plain: true }),
-          add: true
-      })
-  },
-
-  async showDashboard(req, res) {
-
-      const user = await User.findByPk(req.session.user_id, {
-          parts: ['email', 'username'],
-          include: [
-              {
-                  model: BlogPost,
-                  parts: ['id', 'title', 'content', 'date']
-              }
-          ]
-      })
-
-      res.render('dashboard', {
-          title: '',
-          user: user.get({ plain: true }),
-          dashboard: true
-      })
-  },
-
-  async showEditBlogPostPage(req, res) {
-      const user = await User.findByPk(req.session.user_id, {
-          parts: ['email', 'username']
-      });
-      const blogPost = await BlogPost.findByPk(req.params.id);
-
-      res.render('edit', {
-          user: user.get({ plain: true }),
-          title: "TB Edit",
-          blogPost: blogPost.get({ plain: true }),
-          edit_page: true
-      })
-  },
-
-  async showCommentPage(req, res) {
-      const user = await User.findByPk(req.session.user_id, {
-          parts: ['email', 'username']
-      });
-      const blogPost = await BlogPost.findByPk(req.params.blog_id);
-
-      res.render('comment', {
-          user: user.get({ plain: true }),
-          title: "TB Comment",
-          blogPost: blogPost.get({ plain: true }),
-          comment_page: true
-      })
-  }
-
-} 
+};

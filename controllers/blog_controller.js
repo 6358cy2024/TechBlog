@@ -33,22 +33,6 @@ module.exports ={
             res.status(500).send('Internal Server Error');
         }
     },
-    async addComment(req, res) {
-        const formData = req.body;
-        try {
-            await Comment.create({
-                ...formData,
-                BlogPostId: req.params.blog_id,
-                UserId: req.session.user_id
-            });
-
-            res.redirect('/');
-        } catch (error) {
-            console.log(error);
-
-            res.redirect('/comment/' + req.params.blog_id);
-        }
-    },
     
     async deletePosts(req, res) {
 
