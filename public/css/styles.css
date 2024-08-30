@@ -1,11 +1,12 @@
 /* RESETS */
 * {
+    padding: 0;
     box-sizing: border-box;
     font-family: sans-serif;
 }
 
 a {
-    color: #333;
+    color: #444
 }
 
 form {
@@ -13,13 +14,14 @@ form {
     margin: 0 auto;
 }
 
-form>* {
-    padding: 6px 10px;
-    margin-bottom: 6px;
+form > * {
+    padding: 10px 15px;
+    margin-bottom: 10px;
 }
 
-/* GLOBAL CLASSES */
-.row, .column {
+/* GlOBAL CLASESS */
+.row,
+.column {
     display: flex;
 }
 
@@ -39,34 +41,16 @@ form>* {
     text-align: center;
 }
 
-.mr-2 {
+.mr-2{
     margin-right: 15px;
 }
 
 /* CUSTOM STYLES */
 
-nav a {
+nav a{
     text-decoration: none;
 }
 
-nav a.active, nav a:hover {
-    text-decoration: underline;
-}
-
-/*Media*/
-
-@media(max-width: 600px) {
-    header.is-flex-direction-row {
-        display: flex;
-        flex-direction: column !important;
-    }
-
-    header h1.title {
-        font-size: 1.5rem !important;
-        text-align: center;
-    }
-
-    header nav a, header p {
-        font-size: .85rem;
-    }
+nav a.active, nav a:hover{
+    text-decoration:underline;
 }

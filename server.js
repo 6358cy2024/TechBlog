@@ -9,7 +9,7 @@ const view_routes = require('./routes/view_routes.js');
 const user_routes = require('./routes/user_routes');
 
 const app = express();
-const PORT = 3001;
+const PORT = 6358;
 
 app.engine('hbs', engine({ extname: '.hbs' }));
 app.set('view engine', 'hbs');
@@ -18,6 +18,6 @@ app.use('/', [view_routes, user_routes]);
 client.sync({force: false})
 	.then(() => {
 		app.listen(PORT, () => {
-			console.log('Server started on port', PORT);
+			console.log('Server running on', PORT);
 		});
 	});
