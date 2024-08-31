@@ -1,4 +1,4 @@
-const { User, Post, Comment } = require('../models');
+const { User, Blog, Comment } = require('../models');
 const { format } = require('date-fns');
 
 module.exports = {
@@ -26,28 +26,28 @@ module.exports = {
         try {
             const user = await User.findByPk(req.session.user_id, {
                 include: [{
-                    model:Post,
+                    model:Blog,
                     include:[Comment, User]
-                }] // Eager load posts
+                }] 
             });
  
-            // Format the createdAt date for each post
-            const posts = user.posts.map(post => {
+            // Format the createdAt date for each blogpost
+            const blogs = user.blogs.map(blog => {
                 return {
-                    ...post.get({ plain: true }),
-                    formattedDate: format(new Date(post.createdAt), 'dd/MM/yyyy')
+                    ...blog.get({ plain: true }),
+                    formattedDate: format(new Date(blog.createdAt), 'dd/MM/yyyy')
                 };
             });
-            console.log(posts)
+            console.log(blogs)
             res.render('dashboard', {
                 title: 'Blog - Dashboard',
                 user: user.get({ plain: true }),
-                posts, // Pass the formatted posts
+                blogs, 
                 user_page: true,
                 dashboard: true
             });
         } catch (error) {
-            console.error('Error fetching user and posts:', error);
+            console.error('Error fetching user and blogs:', error);
             res.status(500).send('Internal Server Error');
         }
     },
@@ -75,13 +75,13 @@ module.exports = {
             const user = await User.findByPk(req.session.user_id, {
                 attributes: ['username']
             });
-            const post = await Post.findByPk(req.params.post_id);
-            console.log(post)
+            const blog = await Blog.findByPk(req.params.blog_id);
+            console.log(blog)
 
             res.render('edit', {
                 user: user.get({ plain: true }),
                 title: 'Blog - Edit Post',
-                post: post.get({ plain: true }),
+                blog: blog.get({ plain: true }),
                 user_page: true,
                 search: true
             });

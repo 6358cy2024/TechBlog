@@ -18,9 +18,9 @@ module.exports ={
         }
 	},
 
-    async updatePost(req, res) {
+    async updateBlog(req, res) {
         try {
-            const updatedPost = await BlogPost.update({
+            const updatedBlog = await BlogPost.update({
                 title: req.body.title,
                 content: req.body.content
             }, {
@@ -34,7 +34,7 @@ module.exports ={
         }
     },
     
-    async deletePosts(req, res) {
+    async deleteBlogs(req, res) {
 
         await BlogPost.destroy({
             where: {
