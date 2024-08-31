@@ -1,10 +1,21 @@
-const router = require('express').Router();
-const blog_controller = require('../controllers/blog_controller');
+const { DataTypes } = require('sequelize');
+const client = require('../config/connection');
 
-router.post('/add', blog_controller.addPost);
+const Blog = client.define('blog', {
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    content: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    createdAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW
+    }
+});
 
-router.put('/edit/:id', blog_controller.updatePost);
 
-router.delete('/remove/:id', blog_controller.deletePosts);
-
-module.exports = router;
+module.exports = Blog
