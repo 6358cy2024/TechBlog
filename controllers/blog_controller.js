@@ -1,47 +1,46 @@
-const { User,  Blog } = require('../models');
+// const router = require('express').Router();
+const { Blog } = require('../models');
 
-module.exports ={
-	async createBlog (req, res) {
-        const formData = req.body;
+
+module.exports = {
+    async createBlog (req, res){
+        const formData = req.body
+        console.log(formData)
         try {
-            await BlogPost.create({
-                ...formData,//testing spread operator
-                UserId: req.session.user_id
-            });
-
-            res.redirect('/dashboard');//send back to dashboard
-
+            await Blog.create({
+                ...formData,
+                userId: req.session.user_id
+            })
+            res.redirect('/dashboard')
         } catch (error) {
-            console.log(error);
-
-            res.redirect('/add');
-        }
-	},
-
-    async updateBlog(req, res) {
-        try {
-            const updatedBlog = await BlogPost.update({
-                title: req.body.title,
-                content: req.body.content
-            }, {
-                where: { id: req.params.id }
-            });
-
-            res.redirect('/');//send back to homepage
-        } catch (error) {
-            console.error(error);
-            res.status(500).send('Internal Server Error');
+            console.log('add error', error);
+            const errors = error.errors.map((errObj) => {
+              return {
+                message: errObj.message
+              }
+            })
+            res.redirect('/add')
         }
     },
-    
-    async deleteBlogs(req, res) {
-
-        await BlogPost.destroy({
+    async updateBlog(req, res){
+        await Blog.update(
+            req.body,
+            {
+                where:{
+                    id: req.params.blog_id
+                },
+                returning: true,
+                plain: true
+            }
+        )
+        res.redirect('/dashboard')
+    },
+    async deleteBlog(req, res){
+        await Blog.destroy({
             where: {
-                id: req.params.id
+                id: req.params.blog_id
             }
         })
-        res.redirect('/dashboard');
+        res.redirect('/dashboard')
     }
-
 }
