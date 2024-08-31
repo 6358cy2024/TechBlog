@@ -4,20 +4,20 @@ const { format } = require('date-fns');
 module.exports = {
     showHomePage(req, res) {
         res.render('homepage', {
-            title: 'Blog - Homepage'
+            title: 'TechBlog Homepage'
         });
     },
 
     showRegisterPage(req, res) {
         res.render('register', {
-            title: 'Blog - Register',
+            title: 'TechBlog Register',
             register: true
         });
     },
 
     showLoginPage(req, res) {
         res.render('login', {
-            title: 'Blog - Log In',
+            title: 'TechBlog Log In',
             login: true
         });
     },

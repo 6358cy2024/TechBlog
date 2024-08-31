@@ -1,6 +1,5 @@
 const { DataTypes } = require('sequelize');
 const { hash, compare } = require('bcrypt');
-
 const client = require('../config/connection');
 
 const User = client.define('User', {

@@ -8,9 +8,13 @@ const Blog = client.define('Blog', {
 	},
 	content: {
 		type: DataTypes.STRING,
-		allowNull: false,
+		allowNull: false
 	},
-	
+	date: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW
+    }
 });
 
 module.exports = Blog;
