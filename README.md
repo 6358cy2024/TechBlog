@@ -9,4 +9,5 @@ Should also be able to update any previous blog post.
 Should automatically log out if the user is idle for too long.
 
 This is definitely the hardest assignment so far and after studying other references I struggle with it. 
-I am currently working on other assignments to come back to this later and feel refreshed when I eventually do.
+
+This code works, but render doesn't like the code for some reason
