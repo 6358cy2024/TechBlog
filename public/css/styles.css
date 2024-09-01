@@ -5,8 +5,12 @@
     font-family: sans-serif;
 }
 
+body {
+    height:100%;
+}
+
 a {
-    color: #444
+    color: #8be1e3
 }
 
 form {
@@ -44,8 +48,6 @@ form > * {
 .mr-2{
     margin-right: 15px;
 }
-
-/* CUSTOM STYLES */
 
 nav a{
     text-decoration: none;
