@@ -3,26 +3,22 @@ const { hash, compare } = require('bcrypt');
 const client = require('../config/connection');
 
 const User = client.define('User', {
-  email: {
+  username: {
     type: DataTypes.STRING,
     unique: true,
     allowNull: false,
-    validate: {
-      isEmail: true
-    }
   },
   password: {
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
-      len: 6
+      len: [8]
     }
   }
 }, {
   hooks: {
     async beforeCreate(user) {
       user.password = await hash(user.password, 10);
-
       return user;
     }
   }

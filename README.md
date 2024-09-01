@@ -1,7 +1,7 @@
 # TechBlog
 
 The purpose of this assignment is to create a CMS style blog that allows users to sign in, create posts, comment on those posts.
-More importantly to have authorization on the page so that users can sign in with an email and password and then be able to resign in.
+More importantly to have authorization on the page so that users can sign in with a username and password and then be able to resign in.
 
 There should be navigation between the homepage, the dashboard and the log out pages.
 And blog posts should have the author, when it was created, and the date and time it was made.

@@ -17,7 +17,7 @@ module.exports = {
     const formData = req.body;
     const user = await User.findOne({
       where: {
-        email: formData.email
+        username: formData.username
       }
     });
     if (!user) {//if not a user

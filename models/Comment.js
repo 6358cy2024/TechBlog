@@ -13,4 +13,4 @@ const Comment = client.define('Comment', {
     }
 });
 
-module.exports = Comment;
+module.exports = Comment
