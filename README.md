@@ -7,6 +7,7 @@ There should be navigation between the homepage, the dashboard and the log out p
 And blog posts should have the author, when it was created, and the date and time it was made.
 Should also be able to update any previous blog post.
 Should automatically log out if the user is idle for too long.
+I am attempting to learn how to use Bulma
 
 This is definitely the hardest assignment so far and after studying other references I struggle with it. 
 
