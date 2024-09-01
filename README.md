@@ -9,6 +9,5 @@ Should also be able to update any previous blog post.
 Should automatically log out if the user is idle for too long.
 I am attempting to learn how to use Bulma
 
-This is definitely the hardest assignment so far and after studying other references I struggle with it. 
-
-This code works, but render doesn't like the code for some reason
+This is definitely the hardest assignment so far and even with studying and using references.
+It does run but for some reason you cannot login or register and I have been looking through my files. But the render website is deployed and functional.

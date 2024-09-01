@@ -26,7 +26,6 @@ const User = client.define('User', {
 
 User.prototype.validatePassword = async function (formPassword) {
   const is_valid = await compare(formPassword, this.password);
-
   return is_valid;
 }
 
