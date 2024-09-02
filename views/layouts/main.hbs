@@ -10,18 +10,18 @@
     
 </head>
 <body class="has-background-white">
-<header class="columns is-vcentered p-3">
+<header class="columns p-3">
     <div class="column has-text-centered">
         <h3 class="title is-3 is-info">TechBlog</h3>
     </div>
     <div class="column has-text-centered">
         <nav class="is-inline-block">
             {{#if user}}
-            <p class="mr-2">Welcome back, {{user.username}}</p>
-            <a class="mx-3 {{#if add}}is-active{{/if}}" href="/add">Add BlogPost</a>
+            <p class="mr-3">Welcome back, {{user.username}}</p>
+            <a class="mx-5 {{#if add}}is-active{{/if}}" href="/add">Add BlogPost</a>
             <a href="/logout">Logout</a>
             {{else}}
-            <a class="mr-2 {{#if login}}is-active{{/if}}" href="/login">Login</a>
+            <a class="mr-3 {{#if login}}is-active{{/if}}" href="/login">Login</a>
             <span class="mr-2">or</span>
             <a class="{{#if register}}is-active{{/if}}" href="/register">Register</a>
             {{/if}}

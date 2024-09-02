@@ -5,7 +5,6 @@ module.exports = {
     try {
       const user = await User.create(req.body);
       req.session.user_id = user.id;
-
       res.redirect('/dashboard');
     } catch (error) {
       console.log(error);

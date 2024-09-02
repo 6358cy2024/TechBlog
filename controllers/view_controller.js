@@ -31,11 +31,11 @@ module.exports = {
                 }] 
             });
  
-            // Format the createdAt date for each blogpost
+            // Format date for each blogpost
             const blogs = user.blogs.map(blog => {
                 return {
                     ...blog.get({ plain: true }),
-                    formattedDate: format(new Date(blog.createdAt), 'dd/MM/yyyy')
+                    formattedDate: format(new Date(blog.date), 'dd/MM/yyyy')
                 };
             });
             console.log(blogs)
